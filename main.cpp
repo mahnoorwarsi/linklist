@@ -58,7 +58,8 @@ void Delete(node* &head,node* &tail,int val)
  node *found= find(head,tail,val);
  if(&found!=0)
  {
- delete &found;
+   current=current->next;
+ delete found;
  free(found);
  }
  else
@@ -89,11 +90,12 @@ cin>>choice;*/
 {*/
  // cout<<"enter node details to insert"<<endl;
   //cin>>num;
-  insert(head,tail,4);
-  insert(head,tail,3);
-  insert(head,tail,5);
-  insert(head,tail,1);
+   insert(head,tail,1);
   insert(head,tail,2);
+  insert(head,tail,3);
+  insert(head,tail,4);
+  insert(head,tail,5);
+ 
 /*}
 if(choice==2)
 {*/
