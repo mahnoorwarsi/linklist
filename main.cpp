@@ -9,26 +9,34 @@ struct node
 
 
 
-void insert(node* &head,node* &tail,int num)
+void insert(int val)
 {
+  node *start=new node;;
+  node *current=new node;;
+
+
+
   node* ptr=new node;
-  ptr->value=num;
+  ptr->value=val;
   ptr->next=NULL;
 
-  if(head==NULL)
+  if(start==NULL)
     {
-    head=ptr;
-    tail=ptr;
+    start=ptr;
   }
   else
   {
-    tail->next=ptr;
-    tail=tail->next;
+    while(current->next!=NULL)
+   {
+     current=current->next;
+  }
+   current->next=ptr;
   }
 }
-node* find(node* &head,node* &tail,int val)
+node* find(int val)
 {
-  node* current=head;
+  node *start;
+  node* current=start;
   while(current->next!=NULL)
   {
     if(current->value==val)
@@ -38,37 +46,48 @@ node* find(node* &head,node* &tail,int val)
     }
     else
     {
-      //cout<<"value not found"<<endl;
-      return 0;
+      cout<<"value not found"<<endl;
+      return NULL;
     }
   }
 }
-void Delete(node* &head,node* &tail,int val)
+void Delete(int val)
 {
-  node* current=head;
-  if (head->value == val)
+  struct node *start;
+  node* current=start;
+  if (current->value == val)
 	{
-		head = head->next;
+		current =current ->next;
 		free(current);
 		current = NULL;
 	}
   else
-  while(current->next!=NULL || current->value==val)
   {
- node *found= find(head,tail,val);
- if(&found!=0)
+  node* prev=start;
+ node* current=start->next;
+  
+  while( current->value==val)
+  {
+ 
+ if(current->next==NULL)
  {
-   current=current->next;
- delete found;
- free(found);
+   cout<<"required value not found in list"<<endl;
  }
  else
- cout<<"value not found"<<endl;
+ {
+   prev=prev->next;
+   current=current->next;
+ }
+  }
+ prev->next=current->next;
+ free(current);
+ current=NULL;
+ cout<<"node deleted"<<endl;
+  }
 }
-}
-node display(node* &head)
+void display(node* &start)
 {
-  node* &current=head;
+  node* current=start;
     while(current->next!=NULL)
     {
       cout<<current->value<<endl;
@@ -77,12 +96,11 @@ node display(node* &head)
     cout<<current->value<<endl;
 }
 
-main()
+int main()
 {
 //int choice;
-node* head=NULL;
-node* tail=NULL;
-int num,val;
+node *start;
+int val;
 /*cout<<"welcome to data structure"<<endl;
 cout<<"press 1 to insert a node "<<endl<<"press 2 to delete a node"<<endl<<"press 3 to search fora node"<<endl<<"press 4 to display whole list"<<endl;
 cin>>choice;*/
@@ -90,26 +108,28 @@ cin>>choice;*/
 {*/
  // cout<<"enter node details to insert"<<endl;
   //cin>>num;
-   insert(head,tail,1);
-  insert(head,tail,2);
-  insert(head,tail,3);
-  insert(head,tail,4);
-  insert(head,tail,5);
+   insert(1);
+  insert(2);
+  insert(3);
+  insert(4);
+  insert(5);
  
 /*}
 if(choice==2)
 {*/
  // cout<<"enter node details to delete"<<endl;
   //cin>>val;
-  Delete(head,tail,3);
-  display(head);
+ Delete(3);
+  display(start);
 /*}
 if(choice==3)
 {*/
  // cout<<"enter node details you want to find"<<endl;
   //cin>>val;
- find(head,tail,5);
-  find(head,tail,7);
+  find(5);
+   find(7);
+  
+
 /*}
 if(choice==4)
 {*/
